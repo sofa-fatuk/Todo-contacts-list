@@ -1,7 +1,6 @@
 export type User = {
-  email: string,
   name: string,
-  id: number,
+  id: string,
   avatarUrl: string,
-  text: string,
+  mail: string,
 }

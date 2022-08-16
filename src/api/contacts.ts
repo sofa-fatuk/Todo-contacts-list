@@ -59,7 +59,7 @@ export const getContacts = async (): Promise<User[]> => {
 //   } 
 // }
 
-export const deleteContact = async (id: number) => {
+export const deleteContact = async (id: string) => {
   try {
     const response = await fetch(`${CONTACTS_API}/${id}`, {
       method: 'DELETE',

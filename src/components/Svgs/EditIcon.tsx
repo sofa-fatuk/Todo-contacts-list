@@ -2,7 +2,7 @@ import React, { SVGProps } from 'react'
 
 interface Iprops extends SVGProps<SVGSVGElement> {}
 
-function CreateIcon(props: Iprops) {
+function EditIcon(props: Iprops) {
   const { width, height } = props;
 
   return (
@@ -45,4 +45,4 @@ function CreateIcon(props: Iprops) {
 }
 
 
-export default CreateIcon
+export default EditIcon

@@ -1,4 +1,5 @@
-import React, { DetailedHTMLProps, ButtonHTMLAttributes, ReactNode } from 'react'
+import React, { DetailedHTMLProps, ButtonHTMLAttributes } from 'react'
+import CreateIcon from "../Svgs/CreateIcon"
 
 import classes from './style.module.css'
 
@@ -8,16 +9,18 @@ interface Iprops extends DetailedHTMLProps<
 > {
 }
 
-function Button(props: Iprops) {
-  const { value, onClick, type } = props;
+function AddButton(props: Iprops) {
+  const { onClick, type } = props;
 
   return (
     <button
       className={classes.btn}
       type={type}
       onClick={onClick}
-    >{value}</button>
+    >
+      <CreateIcon/>
+    </button>
   )
 }
 
-export default Button;
+export default AddButton;

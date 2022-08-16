@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import classes from './style.module.css'
 
 interface IProps extends React.HTMLProps<HTMLInputElement> {

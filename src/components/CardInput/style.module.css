@@ -1,0 +1,25 @@
+.card__text {
+  background: #d8eff7;
+  border: none;
+  border-bottom: 1px solid #20acdf;
+  outline: none;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.card__text::placeholder {
+  color: #20acdf;
+}
+
+.card__input__readonly {
+  padding: 0;
+  background: #d8eff7;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.card__input__readonly::placeholder {
+  color: black;
+}
