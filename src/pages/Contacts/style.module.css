@@ -1,0 +1,41 @@
+.mainPage {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.title {
+  color: #20acdf;
+  padding: 40px 0;
+  font-size: 60px;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 50px;
+  background: #d8eff7;
+  padding: 5px;
+  margin-top: 10px; 
+  border-radius: 10px;
+}
+
+.blockChange {
+  width: 50%;
+  display: flex;
+  margin-right: 10px;
+}
+
+.search input, 
+.addContact input {
+  height: 20px;
+  padding: 15px 7px;
+  font-size: 13px;
+  outline: none;
+  border: 1px solid #d8eff7
+}
+
+.search {
+  margin-right: 10px;
+}

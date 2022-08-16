@@ -1,0 +1,21 @@
+.authPage {
+  /* background-color: green; */
+  height: 100vh;
+  text-align: center;
+  margin: 0 auto;
+  /* padding-top: 157px; */
+  padding-top: 10%;
+}
+
+.title {
+  margin: 0;
+  line-height: 80px;
+  font-weight: 400;
+  color: #20acdf;
+  font-size: 60px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
