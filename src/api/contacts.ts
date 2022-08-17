@@ -6,12 +6,11 @@ import { User } from '../types';
 import store from '../store';
 import { 
   setContacts,
-  // addContacts, 
   deleteContact as deleteContactAction
 } from '../store/actions';
 import { Dispatch } from 'redux';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const getContacts = async (): Promise<User[]> => {
   try {
     const response = await fetch(CONTACTS_API, {
@@ -35,29 +34,32 @@ export const getContacts = async (): Promise<User[]> => {
   } 
 }
 
-// export const addNewContact = async (id: number) => {
-//   try {
-//     const response = await fetch(`${CONTACTS_API}/${id}`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     });
-//     // const contacts = await response.json();
+export const addNewContact = async (user: User) => {
+  try {
+    const response = await fetch(CONTACTS_API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    console.log(response);
+    const body = await response.json();
 
-//     console.log(response)
-//     //  проверить что в ответе нет ошибки
+    console.log(body)
+    const { status } = response
+    console.log(status)
+    if (status === 200 || status === 201) {
+      return true
+    }
 
-//     const thunkFunction = (dispatch: Dispatch) => {
-//       dispatch(addContacts(id))
-//     }
-//     store.dispatch(thunkFunction)
+    throw Error(body.errorMessage)
 
-//   } catch (error) {
-//     console.error(error);
-//     return []
-//   } 
-// }
+  } catch (error) {
+    console.error(error);
+    return false
+  } 
+}
 
 export const deleteContact = async (id: string) => {
   try {

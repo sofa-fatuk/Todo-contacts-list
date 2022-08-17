@@ -9,10 +9,8 @@ import { getContacts } from '../../api/contacts'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store'
 import { User } from '../../types'
-
+import { addContact } from '../../store/actions'  
 import classes from './style.module.css'
-import { addContact } from '../../store/actions'
-import userEvent from '@testing-library/user-event'
 
 function Contacts() {
   const [search, setChangeSearch] = useState('')
@@ -32,7 +30,8 @@ function Contacts() {
       id: nanoid(),
       name: '',
       mail: '',
-      avatarUrl: 'https://icon-library.com/images/icon-user/icon-user-19.jpg'
+      avatarUrl: 'https://icon-library.com/images/icon-user/icon-user-19.jpg',
+      isDraft: true
     }
     dispatch(addContact(newUser))
     setCurrentEditElementId(newUser.id)
@@ -73,6 +72,7 @@ function Contacts() {
             user={user}
             readOnly={currentEditElementId !== user.id}
             onChange={changeContact}
+            setCurrentEditElementId={setCurrentEditElementId}
           />
         </div>
       ))}

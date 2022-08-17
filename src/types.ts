@@ -3,4 +3,5 @@ export type User = {
   id: string,
   avatarUrl: string,
   mail: string,
+  isDraft?: boolean,
 }
