@@ -1,4 +1,4 @@
-import React, { FormEvent, ChangeEvent, CSSProperties, useState } from 'react';
+import React, { FormEvent, ChangeEvent, CSSProperties, useState, useEffect } from 'react';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -35,6 +35,16 @@ function SignUp() {
     const { target: { value = '' } } = event
     setRepeatPassword(value)
   }
+
+  // useEffect(() => {
+  //   if (submittedOnce) {
+  //     if (password === repeatPassword) {
+  //       setError(false);
+  //     } else {
+  //       setError(true);
+  //     }
+  //   }
+  // }, [repeatPassword, password, submittedOnce]);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

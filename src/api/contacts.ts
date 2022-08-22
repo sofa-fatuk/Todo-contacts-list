@@ -6,14 +6,15 @@ import { User } from '../types';
 import store from '../store';
 import { 
   setContacts,
+  editContact,
   deleteContact as deleteContactAction
 } from '../store/actions';
 import { Dispatch } from 'redux';
 
 
-export const getContacts = async (): Promise<User[]> => {
+export const getContacts = async (search: string): Promise<User[]> => {
   try {
-    const response = await fetch(CONTACTS_API, {
+    const response = await fetch(`${CONTACTS_API}?name_like=${search}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,12 +44,9 @@ export const addNewContact = async (user: User) => {
       },
       body: JSON.stringify(user),
     });
-    console.log(response);
     const body = await response.json();
 
-    console.log(body)
     const { status } = response
-    console.log(status)
     if (status === 200 || status === 201) {
       return true
     }
@@ -58,6 +56,37 @@ export const addNewContact = async (user: User) => {
   } catch (error) {
     console.error(error);
     return false
+  } 
+}
+
+export const editContacts = async (user: User) => {
+  try {
+    const response = await fetch(`${CONTACTS_API}/${user.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    console.log('respons', response)
+
+    const body = await response.json();
+    console.log(body)
+
+    const thunkFunction = (dispatch: Dispatch) => {
+      dispatch(editContact(user))
+    }
+    store.dispatch(thunkFunction)
+
+    const { status } = response
+    if (status === 200 || status === 201) {
+      return true
+    }
+
+    throw Error(body.errorMessage)
+  } catch (error) {
+    console.error(error);
+    return []
   } 
 }
 

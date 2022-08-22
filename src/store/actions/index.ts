@@ -3,6 +3,8 @@ import { User } from "../../types"
 export const SET_CONTACT = 'SET_CONTACT'
 export const ADD_NEW_CONTACT = 'ADD_NEW_CONTACT'
 export const DELETE_CONTACT = 'DELETE_CONTACT'
+export const EDIT_CONTACT = 'EDIT_CONTACT'
+
 
 
 export function setContacts(contacts: User[]) {
@@ -15,6 +17,13 @@ export function setContacts(contacts: User[]) {
 export function addContact(user: User) {
   return {
     type: ADD_NEW_CONTACT,
+    user,
+  }
+}
+
+export function editContact(user: User) {
+  return {
+    type: EDIT_CONTACT,
     user,
   }
 }

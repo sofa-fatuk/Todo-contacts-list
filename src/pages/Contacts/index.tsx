@@ -1,5 +1,6 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
+import React, { useState, useEffect, ChangeEvent, useRef } from 'react'
 import { nanoid } from 'nanoid'
+import debounce from 'lodash.debounce'
 
 import UserContact from '../../components/UserContact'
 import AddButton from '../../components/AddButton'
@@ -16,6 +17,11 @@ function Contacts() {
   const [search, setChangeSearch] = useState('')
   const [currentEditElementId, setCurrentEditElementId] = useState('')
 
+  // const debouncedQuery = useCallback(
+  //   debounce(search=> getContacts(search), 300),
+  //   []
+  // )
+  const debouncedQuery = useRef(debounce(search=> getContacts(search), 300)).current;
 
   const dispatch = useDispatch()
   const contacts = useSelector<RootState>(state => state.contacts) as User[]
@@ -31,7 +37,7 @@ function Contacts() {
       name: '',
       mail: '',
       avatarUrl: 'https://icon-library.com/images/icon-user/icon-user-19.jpg',
-      isDraft: true
+      isNewUserDraft: true
     }
     dispatch(addContact(newUser))
     setCurrentEditElementId(newUser.id)
@@ -42,8 +48,8 @@ function Contacts() {
   }
 
   useEffect(() => {
-    getContacts()
-  }, [])
+    debouncedQuery(search)
+  }, [debouncedQuery, search])
 
   return (
     <div className={classes.mainPage}>

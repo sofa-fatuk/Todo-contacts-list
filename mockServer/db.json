@@ -1,0 +1,32 @@
+{
+  "contacts": [
+    {
+      "id": "V1StGXR8_Z5jdHi6B-myT",
+      "name": "sofa",
+      "mail": "sofa111298@gmail.com",
+      "avatarUrl": "https://lahiphopevents.com/wp-content/uploads/2021/08/erykah-badu.png"
+    },
+    {
+      "id": "V2StGXR8_Z5jdHi6B-myT",
+      "name": "kate",
+      "mail": "katir@email.com",
+      "avatarUrl": "https://www.bluenote.com/files/2021/05/JamesFrancies_9578wide_byShervinLainez.jpg"
+    },
+    {
+      "id": "F5UVU8M9fwn7RpQcOgLqx",
+      "name": "foxy",
+      "mail": "Mr.fox@gmail.com",
+      "avatarUrl": "https://lapku.ru/wp-content/uploads/2021/12/Pochemu-lisa-hitraya-i-ryzhaya.jpeg"
+    },
+    {
+      "id": "Drp61v7L4U227GLMgkeOB"
+    },
+    {
+      "id": "9qE5hxlNdMjzqmwjlLZI1",
+      "name": "jhgbjhbj",
+      "mail": "iuhiuh",
+      "avatarUrl": "",
+      "isNewUserDraft": true
+    }
+  ]
+}
