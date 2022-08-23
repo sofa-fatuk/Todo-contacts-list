@@ -4,6 +4,7 @@ import {
   ADD_NEW_CONTACT,
   DELETE_CONTACT,
   EDIT_CONTACT,
+  CONCAT_CONTACTS,
 } from '../actions'
 
 type SetContactsAction = {
@@ -26,14 +27,19 @@ type EditContactsAction = {
   type: string,
 }
 
+type ConcatContactsAction = {
+  users: User[],
+  type: string,
+}
+
 const initialState: User[] = []
 
-function contactsReducer(state = initialState, action: SetContactsAction | DeleteContactsAction | AddContactAction | EditContactsAction) {
+function contactsReducer(state = initialState, action: SetContactsAction | DeleteContactsAction | AddContactAction | EditContactsAction | ConcatContactsAction) {
   switch (action.type) {
     case SET_CONTACT:
       return (action as SetContactsAction).contacts
     case ADD_NEW_CONTACT:
-      return state.concat((action as AddContactAction).user)
+      return [(action as AddContactAction).user, ...state]
     case EDIT_CONTACT:
       const editContactUser = (action as EditContactsAction).user
       return state.map(item => { 
@@ -45,6 +51,8 @@ function contactsReducer(state = initialState, action: SetContactsAction | Delet
     case DELETE_CONTACT:
       const deleteContactId = (action as DeleteContactsAction).id
       return state.filter(item => item.id !== deleteContactId)
+    case CONCAT_CONTACTS:
+      return state.concat((action as ConcatContactsAction).users)
     default:
       return state
   }

@@ -48,18 +48,20 @@ function UserContact(props: Iprops) {
   const addChange = async () => {
     console.log('123123')
     console.log("user", user)
+    console.log('x', avatarUrlValue.trim())
+    const userAvatarUrl = avatarUrlValue.trim() || user.avatarUrl
     const newUser: User = {
-      ...user,
+      id: user.id,
       name,
       mail,
-      avatarUrl: avatarUrlValue,
+      avatarUrl: userAvatarUrl,
     }
 
     if (user.isNewUserDraft) {
       const createSuccess = await addNewContact(newUser)
       if (createSuccess) {
         setCurrentEditElementId('')
-        setAvatarUrl(avatarUrlValue)
+        setAvatarUrl(userAvatarUrl)
       }
     } else {
       const editSuccess = await editContacts(newUser)

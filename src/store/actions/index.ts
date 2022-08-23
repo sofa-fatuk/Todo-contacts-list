@@ -4,13 +4,20 @@ export const SET_CONTACT = 'SET_CONTACT'
 export const ADD_NEW_CONTACT = 'ADD_NEW_CONTACT'
 export const DELETE_CONTACT = 'DELETE_CONTACT'
 export const EDIT_CONTACT = 'EDIT_CONTACT'
-
+export const CONCAT_CONTACTS = 'CONCAT_CONTACTS'
 
 
 export function setContacts(contacts: User[]) {
   return {
     type: SET_CONTACT,
     contacts,
+  }
+}
+
+export function concatContacts(users: User[]) {
+  return {
+    type: CONCAT_CONTACTS,
+    users,
   }
 }
 
