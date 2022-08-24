@@ -1,18 +1,20 @@
-import React, { FormEvent, ChangeEvent, CSSProperties, useState, useEffect } from 'react';
+import React, { FormEvent, ChangeEvent, CSSProperties, useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { signUpUser } from '../../api/user'
-import { User } from '../../types';
 import classes from './style.module.css';
+import { nanoid } from 'nanoid';
 
 function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [error, setError] = useState(false);
-  const [submittedOnce, setSubmittedOnce] = useState(false);
+  const navigate = useNavigate();
 
   const getInputStyle = (): CSSProperties | undefined => {
     if (error) {
@@ -36,27 +38,16 @@ function SignUp() {
     setRepeatPassword(value)
   }
 
-  // useEffect(() => {
-  //   if (submittedOnce) {
-  //     if (password === repeatPassword) {
-  //       setError(false);
-  //     } else {
-  //       setError(true);
-  //     }
-  //   }
-  // }, [repeatPassword, password, submittedOnce]);
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmittedOnce(true);
     if (password === repeatPassword) {
       setError(false);
 
-      signUpUser({ email, password })
-        .then((user: User) => {
-          localStorage.setItem('user', JSON.stringify(user));
-        });
-      console.log('SUBMITTED');
+      const success = await signUpUser({ email, password, id: nanoid() })
+
+      if (success) {
+        navigate('/contacts')
+      }
     } else {
       setError(true);
     }

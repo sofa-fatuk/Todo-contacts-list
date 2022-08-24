@@ -5,3 +5,12 @@ export type User = {
   mail: string,
   isNewUserDraft?: boolean,
 }
+
+export type AuthUser = {
+  email: string,
+  id: string,
+}
+
+export type AuthUserRegistrationRequest = AuthUser & {
+  password: string,
+}

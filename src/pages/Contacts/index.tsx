@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, useRef, useCallback } from 'react'
 import { nanoid } from 'nanoid'
 import debounce from 'lodash.debounce'
-import InfiniteScroll from 'react-infinite-scroll-component';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import UserContact from '../../components/UserContact'
 import AddButton from '../../components/AddButton'
@@ -14,9 +14,13 @@ import { User } from '../../types'
 import { addContact } from '../../store/actions'
 
 import classes from './style.module.css'
+import { UserState } from '../../store/reducers/user';
+import { useNavigate } from 'react-router-dom';
 
 
 function Contacts() {
+  const navigate = useNavigate();
+
   const [search, setChangeSearch] = useState('')
   const [currentEditElementId, setCurrentEditElementId] = useState('')
   const [page, setPage] = useState(1);
@@ -25,22 +29,34 @@ function Contacts() {
 
   const didMountRef = useRef(false);
 
-  const debouncedQuery = useRef(debounce(search => getContacts(search, 1, true), 300)).current;
+  const debouncedQuery = useRef(debounce(search => {
+    getContacts(search, 1, true).then(({ hasMore }) => {
+      setHasMore(hasMore)
+    })
+  }, 300)).current;
 
   const dispatch = useDispatch()
   const contacts = useSelector<RootState>(state => state.contacts) as User[]
+  const { authenticated } = useSelector<RootState>(state => state.user) as UserState
+
+  useEffect(() => {
+    if (!authenticated) {
+      navigate('/sign-up')
+    }
+  }, [authenticated])
 
   const fetchContacts = useCallback(async (currentPage: number) => {
     setLoading(true)
-    console.log('search', search)
     const { hasMore } = await getContacts(search, currentPage)
     setLoading(false)
     setHasMore(hasMore)
   }, [search])
 
   const fetchData = () => {
-    setPage(page + 1)
-    fetchContacts(page + 1)
+    if (!loading) {
+      setPage(page + 1)
+      fetchContacts(page + 1)
+    }
   }
 
   useEffect(() => {
@@ -74,8 +90,6 @@ function Contacts() {
     setCurrentEditElementId(id)
   }
 
-  console.log('hasMore', hasMore);
-
   return (
     <div className={classes.mainPage}>
       <h1 className={classes.title}>List of contacts</h1>
@@ -97,15 +111,10 @@ function Contacts() {
       </div>
 
       <InfiniteScroll
-        dataLength={contacts.length}
-        next={fetchData}
+        initialLoad={false}
+        loadMore={fetchData}
         hasMore={hasMore}
-        loader={loading && <h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
+        loader={loading ? <h4 key="loader">Loading...</h4> : undefined}
       >
         {contacts.map((user) => (
           <div key={user.id} className={classes.user}>

@@ -25,7 +25,6 @@ export const getContacts = async (search: string, page: number, reset = false): 
       },
     });
     const contacts = await response.json();
-    console.log('contact12312s', contacts)
 
     if (reset) {
       store.dispatch(setContacts(contacts))
@@ -34,7 +33,7 @@ export const getContacts = async (search: string, page: number, reset = false): 
     }
 
     return {
-      hasMore: contacts.length >= 1,
+      hasMore: contacts.length > 0,
     }
   } catch (error) {
     console.error(error);
@@ -77,10 +76,8 @@ export const editContacts = async (user: User) => {
       },
       body: JSON.stringify(user),
     });
-    console.log('respons', response)
 
     const body = await response.json();
-    console.log(body)
 
     store.dispatch(editContact(user))
 
@@ -104,7 +101,6 @@ export const deleteContact = async (id: string) => {
         'Content-Type': 'application/json',
       },
     });
-    console.log(response)
 
     store.dispatch(deleteContactAction(id))
 

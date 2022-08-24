@@ -46,9 +46,6 @@ function UserContact(props: Iprops) {
   }
 
   const addChange = async () => {
-    console.log('123123')
-    console.log("user", user)
-    console.log('x', avatarUrlValue.trim())
     const userAvatarUrl = avatarUrlValue.trim() || user.avatarUrl
     const newUser: User = {
       id: user.id,

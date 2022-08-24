@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 
 const getData = () => {
-  const data = { contacts: [] }
+  const data = { contacts: [], users: [] }
   for (let i = 0; i < 50; i++) {
     data.contacts.push({
       id: nanoid(),
@@ -19,6 +19,7 @@ const getData = () => {
       name: `sofa-${i}`,
     })
   }
+
   return data
 }
 

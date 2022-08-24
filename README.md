@@ -1,6 +1,7 @@
 # How to run project
 
 ### `npm run server`
+then in other terminal
 ### `npm start`
 
 ## Available Scripts

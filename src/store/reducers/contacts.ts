@@ -5,6 +5,7 @@ import {
   DELETE_CONTACT,
   EDIT_CONTACT,
   CONCAT_CONTACTS,
+  
 } from '../actions'
 
 type SetContactsAction = {

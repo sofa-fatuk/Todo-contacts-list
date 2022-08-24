@@ -4,5 +4,3 @@ export const CONTACTS_RESOURCE = '/contacts'
 
 export const USER_API = `${API_URL_HOST}${USERS_RESOURCE}`
 export const CONTACTS_API = `${API_URL_HOST}${CONTACTS_RESOURCE}`
-export const LOGIN_URL = `${API_URL_HOST}/login`
-console.log(CONTACTS_API)
