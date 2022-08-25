@@ -2,7 +2,7 @@ import {
   CONTACTS_API,
 } from './constants';
 
-import { User } from '../types';
+import { Contact } from '../types';
 import store from '../store';
 import { 
   editContact,
@@ -43,14 +43,14 @@ export const getContacts = async (search: string, page: number, reset = false): 
   } 
 }
 
-export const addNewContact = async (user: User) => {
+export const addNewContact = async (contact: Contact) => {
   try {
     const response = await fetch(CONTACTS_API, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(contact),
     });
     const body = await response.json();
 
@@ -67,19 +67,19 @@ export const addNewContact = async (user: User) => {
   } 
 }
 
-export const editContacts = async (user: User) => {
+export const editContacts = async (contact: Contact) => {
   try {
-    const response = await fetch(`${CONTACTS_API}/${user.id}`, {
+    const response = await fetch(`${CONTACTS_API}/${contact.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(contact),
     });
 
     const body = await response.json();
 
-    store.dispatch(editContact(user))
+    store.dispatch(editContact(contact))
 
     const { status } = response
     if (status === 200 || status === 201) {
@@ -101,6 +101,8 @@ export const deleteContact = async (id: string) => {
         'Content-Type': 'application/json',
       },
     });
+    // console.log('delete', response);
+    
 
     store.dispatch(deleteContactAction(id))
 

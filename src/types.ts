@@ -1,9 +1,9 @@
-export type User = {
+export type Contact = {
   name: string,
   id: string,
   avatarUrl: string,
   mail: string,
-  isNewUserDraft?: boolean,
+  isNewContactDraft?: boolean,
 }
 
 export type AuthUser = {

@@ -1,4 +1,4 @@
-import { AuthUser, User } from "../../types"
+import { AuthUser, Contact } from "../../types"
 
 export const SET_CONTACT = 'SET_CONTACT'
 export const ADD_NEW_CONTACT = 'ADD_NEW_CONTACT'
@@ -15,31 +15,31 @@ export function setUser(user: AuthUser) {
 }
 
 
-export function setContacts(contacts: User[]) {
+export function setContacts(contacts: Contact[]) {
   return {
     type: SET_CONTACT,
     contacts,
   }
 }
 
-export function concatContacts(users: User[]) {
+export function concatContacts(contacts: Contact[]) {
   return {
     type: CONCAT_CONTACTS,
-    users,
+    contacts,
   }
 }
 
-export function addContact(user: User) {
+export function addContact(contact: Contact) {
   return {
     type: ADD_NEW_CONTACT,
-    user,
+    contact,
   }
 }
 
-export function editContact(user: User) {
+export function editContact(contact: Contact) {
   return {
     type: EDIT_CONTACT,
-    user,
+    contact,
   }
 }
 

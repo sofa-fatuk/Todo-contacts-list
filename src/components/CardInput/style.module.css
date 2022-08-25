@@ -5,6 +5,7 @@
   outline: none;
   font-size: 12px;
   font-weight: 400;
+
 }
 
 .card__text::placeholder {
@@ -12,13 +13,14 @@
 }
 
 .card__input__readonly {
+  width: 100%;
   padding: 0;
   background: #d8eff7;
   border: none;
   outline: none;
   font-size: 15px;
   font-weight: 500;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
   /* overflow: hidden; */
 }
 

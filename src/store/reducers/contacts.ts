@@ -1,4 +1,4 @@
-import { User } from '../../types';
+import { Contact } from '../../types';
 import {
   SET_CONTACT,
   ADD_NEW_CONTACT,
@@ -9,7 +9,7 @@ import {
 } from '../actions'
 
 type SetContactsAction = {
-  contacts: User[],
+  contacts: Contact[],
   type: string,
 }
 
@@ -19,30 +19,30 @@ type DeleteContactsAction = {
 }
 
 type AddContactAction = {
-  user: User,
+  contact: Contact,
   type: string,
 }
 
 type EditContactsAction = {
-  user: User,
+  contact: Contact,
   type: string,
 }
 
 type ConcatContactsAction = {
-  users: User[],
+  contacts: Contact[],
   type: string,
 }
 
-const initialState: User[] = []
+const initialState: Contact[] = []
 
 function contactsReducer(state = initialState, action: SetContactsAction | DeleteContactsAction | AddContactAction | EditContactsAction | ConcatContactsAction) {
   switch (action.type) {
     case SET_CONTACT:
       return (action as SetContactsAction).contacts
     case ADD_NEW_CONTACT:
-      return [(action as AddContactAction).user, ...state]
+      return [(action as AddContactAction).contact, ...state]
     case EDIT_CONTACT:
-      const editContactUser = (action as EditContactsAction).user
+      const editContactUser = (action as EditContactsAction).contact
       return state.map(item => { 
         if (item.id !== editContactUser.id) {
           return item
@@ -53,7 +53,7 @@ function contactsReducer(state = initialState, action: SetContactsAction | Delet
       const deleteContactId = (action as DeleteContactsAction).id
       return state.filter(item => item.id !== deleteContactId)
     case CONCAT_CONTACTS:
-      return state.concat((action as ConcatContactsAction).users)
+      return state.concat((action as ConcatContactsAction).contacts)
     default:
       return state
   }

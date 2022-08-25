@@ -10,7 +10,7 @@ import Input from '../../components/Input'
 import { getContacts } from '../../api/contacts'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store'
-import { User } from '../../types'
+import { Contact } from '../../types'
 import { addContact } from '../../store/actions'
 
 import classes from './style.module.css'
@@ -36,7 +36,7 @@ function Contacts() {
   }, 300)).current;
 
   const dispatch = useDispatch()
-  const contacts = useSelector<RootState>(state => state.contacts) as User[]
+  const contacts = useSelector<RootState>(state => state.contacts) as Contact[]
   const { authenticated } = useSelector<RootState>(state => state.user) as UserState
 
   useEffect(() => {
@@ -75,15 +75,15 @@ function Contacts() {
   }
 
   const addNewContact = () => {
-    const newUser: User = {
+    const newContact: Contact = {
       id: nanoid(),
       name: '',
       mail: '',
       avatarUrl: 'https://icon-library.com/images/icon-user/icon-user-19.jpg',
-      isNewUserDraft: true
+      isNewContactDraft: true
     }
-    dispatch(addContact(newUser))
-    setCurrentEditElementId(newUser.id)
+    dispatch(addContact(newContact))
+    setCurrentEditElementId(newContact.id)
   }
 
   const changeContact = (id: string) => {
@@ -116,16 +116,18 @@ function Contacts() {
         hasMore={hasMore}
         loader={loading ? <h4 key="loader">Loading...</h4> : undefined}
       >
-        {contacts.map((user) => (
-          <div key={user.id} className={classes.user}>
+        {contacts.map((contact) => {
+
+          return (
+          <div key={contact.id} className={classes.contact}>
             <UserContact
-              user={user}
-              readOnly={currentEditElementId !== user.id}
+              contact={contact}
+              readOnly={currentEditElementId !== contact.id}
               onChange={changeContact}
               setCurrentEditElementId={setCurrentEditElementId}
             />
           </div>
-        ))}
+        )})}
       </InfiniteScroll>
     </div>
   )

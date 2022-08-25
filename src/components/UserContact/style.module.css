@@ -1,5 +1,5 @@
 
-.user {
+.contact {
   position: relative;
   display: flex;
 }
@@ -13,6 +13,7 @@
 }
 
 .info {
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

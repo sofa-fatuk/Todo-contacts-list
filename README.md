@@ -4,6 +4,8 @@
 then in other terminal
 ### `npm start`
 
+Node version - v18.0.0
+
 ## Available Scripts
 
 In the project directory, you can run:

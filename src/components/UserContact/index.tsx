@@ -4,23 +4,23 @@ import DeleteIcon from '../Svgs/DeleteIcon'
 import CardInput from '../CardInput'
 import SaveIcon from '../Svgs/SaveIcon'
 
-import { User } from '../../types'
+import { Contact } from '../../types'
 import { addNewContact, deleteContact, editContacts } from '../../api/contacts'
 import classes from './style.module.css'
 
 interface Iprops {
-  user: User,
+  contact: Contact,
   readOnly: boolean,
   onChange: (id: string) => void
   setCurrentEditElementId: (id: string) => void
 }
 
 function UserContact(props: Iprops) {
-  const { user, readOnly, onChange, setCurrentEditElementId } = props
-  const [name, setName] = useState(user.name)
-  const [mail, setMail] = useState(user.mail)
-  const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl)
-  const [avatarUrlValue, setAvatarUrlValue] = useState(user.isNewUserDraft ? '' : user.avatarUrl)
+  const { contact, readOnly, onChange, setCurrentEditElementId } = props
+  const [name, setName] = useState(contact.name)
+  const [mail, setMail] = useState(contact.mail)
+  const [avatarUrl, setAvatarUrl] = useState(contact.avatarUrl)
+  const [avatarUrlValue, setAvatarUrlValue] = useState(contact.isNewContactDraft ? '' : contact.avatarUrl)
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     const { target: { value = '' } } = event
@@ -38,38 +38,39 @@ function UserContact(props: Iprops) {
   }
 
   const onDelete = () => {
-    deleteContact(user.id)
+    deleteContact(contact.id)
   }
 
   const onEdit = () => {
-    onChange(user.id)
+    onChange(contact.id)
   }
 
   const addChange = async () => {
-    const userAvatarUrl = avatarUrlValue.trim() || user.avatarUrl
-    const newUser: User = {
-      id: user.id,
+    const userAvatarUrl = avatarUrlValue.trim() || contact.avatarUrl
+    const newContact: Contact = {
+      id: contact.id,
       name,
       mail,
       avatarUrl: userAvatarUrl,
     }
 
-    if (user.isNewUserDraft) {
-      const createSuccess = await addNewContact(newUser)
+    if (contact.isNewContactDraft) {
+      const createSuccess = await addNewContact(newContact)
       if (createSuccess) {
         setCurrentEditElementId('')
         setAvatarUrl(userAvatarUrl)
       }
     } else {
-      const editSuccess = await editContacts(newUser)
+      const editSuccess = await editContacts(newContact)
       if (editSuccess) {
         setCurrentEditElementId('')
+        setAvatarUrl(userAvatarUrl)
       }
     }
   }
 
   return (
-    <div className={classes.user}>
+    <div className={classes.contact}>
       <img className={classes.avatar__img} src={avatarUrl} />
       <div className={classes.info}>
         <CardInput
