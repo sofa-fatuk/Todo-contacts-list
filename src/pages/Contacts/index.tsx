@@ -117,16 +117,15 @@ function Contacts() {
         loader={loading ? <h4 key="loader">Loading...</h4> : undefined}
       >
         {contacts.map((contact) => {
-
           return (
-          <div key={contact.id} className={classes.contact}>
-            <UserContact
-              contact={contact}
-              readOnly={currentEditElementId !== contact.id}
-              onChange={changeContact}
-              setCurrentEditElementId={setCurrentEditElementId}
-            />
-          </div>
+            <div key={contact.id} className={classes.contact}>
+              <UserContact
+                contact={contact}
+                readOnly={currentEditElementId !== contact.id}
+                onChange={changeContact}
+                setCurrentEditElementId={setCurrentEditElementId}
+              />
+            </div>
         )})}
       </InfiniteScroll>
     </div>
