@@ -46,7 +46,7 @@ function SignUp() {
       const success = await signUpUser({ email, password, id: nanoid() })
 
       if (success) {
-        navigate('/contacts')
+        navigate('/')
       }
     } else {
       setError(true);

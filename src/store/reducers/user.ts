@@ -10,7 +10,7 @@ export type UserState = {
 const userFromLocalStorage = localStorage.getItem('user')
 const user = userFromLocalStorage && JSON.parse(userFromLocalStorage)
 
-export const initialState = {
+export const initialState: UserState = {
   user,
   authenticated: Boolean(user),
 }
